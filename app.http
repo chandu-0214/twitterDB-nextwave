@@ -1,0 +1,22 @@
+POST http://localhost:3001/register/
+Content-Type: application/json
+
+{
+    "username": "JoeBiden25",
+    "password": "biden@1234",
+    "name": "Adam Richard",
+    "gender": "male"
+}
+
+####
+POST http://localhost:3001/login/
+Content-Type: application/json
+
+{
+  "username":"JoeBiden25",
+  "password":"biden@1234"
+}
+
+####
+GET http://localhost:3001/user/tweets/feed/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuMjUiLCJpYXQiOjE2NjI0MDcxNzN9.8wn5lKdMgs01lOL5_Nh3YHgJuIrY8lz1zoKCryL7Hi8
