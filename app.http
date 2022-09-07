@@ -1,22 +1,82 @@
-POST http://localhost:3001/register/
+
+
+###
+
+POST http://localhost:3000/register/
 Content-Type: application/json
 
 {
-    "username": "JoeBiden25",
-    "password": "biden@1234",
-    "name": "Adam Richard",
-    "gender": "male"
+  "username": "JoeBiden",
+  "password": "richard_567",
+  "name": "Adam Richard",
+  "gender": "male"
 }
 
-####
-POST http://localhost:3001/login/
+###
+
+POST http://localhost:3000/login/
 Content-Type: application/json
 
 {
-  "username":"JoeBiden25",
-  "password":"biden@1234"
+  "username":"JoeBiden",
+  "password":"biden@123"
 }
 
-####
-GET http://localhost:3001/user/tweets/feed/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuMjUiLCJpYXQiOjE2NjI0MDcxNzN9.8wn5lKdMgs01lOL5_Nh3YHgJuIrY8lz1zoKCryL7Hi8
+###3
+
+GET http://localhost:3000/user/tweets/feed/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+###4
+
+GET http://localhost:3000/user/followers/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+###5
+
+GET http://localhost:3000/user/following/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+###6
+
+GET http://localhost:3000/tweets/:tweetId/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+###7
+
+GET http://localhost:3000/tweets/:tweetId/likes/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+###8
+
+GET http://localhost:3000/tweets/:tweetId/replies/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+###9
+
+GET http://localhost:3000/user/tweets/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+###10
+
+POST http://localhost:3000/user/tweets/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+
+###11
+
+DELETE http://localhost:3000/tweets/:tweetId/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
+
+
+###12
+#
+#GET http://localhost:3000/user/followers/
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvZUJpZGVuIiwiaWF0IjoxNjU5ODg1NTU3fQ.NiR_GmKDQ4MM1221r_BlJJsPMLxmd_2rAEZ5bcLH6nQ 
