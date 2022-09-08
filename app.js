@@ -189,11 +189,11 @@ app.get("/user/following/", authenticateToken, async (request, response) => {
   //console.log("string");
   const userIdQuery = `SELECT user_id from user where username= '${username}';`;
   const { user_id } = await database.get(userIdQuery);
-  console.log(user_id, "user id");
-  const getUserFollowQuery = `
-    SELECT name from user  WHERE user_id IN (SELECT follower_user_id FROM follower INNER JOIN user ON user.user_id=follower.following_user_id WHERE user.user_id=${user_id});`;
+  console.log(typeof user_id, "user id");
+  const getUserFollowQuery = `SELECT name from user WHERE user_id IN (SELECT follower_user_id FROM follower INNER JOIN user ON user.user_id=follower.following_user_id WHERE user.user_id= ${user_id});`;
   const follower = await database.all(getUserFollowQuery);
-  response.send(convertUserTableDbObjectToResponseObject(follower));
+  console.log(follower);
+  response.send(convertUserTableDbObjectToResponseObjectTest(follower));
 });
 
 //API-5
@@ -201,10 +201,13 @@ app.get("/user/following/", authenticateToken, async (request, response) => {
 app.get("/user/followers/", authenticateToken, async (request, response) => {
   const { followers } = request.params;
   let { username } = request;
+  const userIdQuery = `SELECT user_id from user where username= '${username}';`;
+  const { user_id } = await database.get(userIdQuery);
+  console.log(user_id, "user id");
   const getUserNameQuery = `
-    SELECT name from user WHERE user_id IN (SELECT following_user_id FROM follower INNER JOIN user ON user.user_id=follower.follower_user_id  WHERE user.username=${username});`;
+    SELECT name from user WHERE user_id IN (SELECT following_user_id FROM follower INNER JOIN user ON user.user_id=follower.follower_user_id WHERE user.user_id= ${user_id});`;
   const name = await database.all(getUserNameQuery);
-  response.send(convertFollowerTableDbObjectToResponseObject(followerName));
+  response.send(name);
 });
 
 //API-6
