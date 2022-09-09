@@ -50,9 +50,18 @@ const convertFollowerTableDbObjectToResponseObject = (dbObject) => {
 
 const convertTweetTableDbObjectToResponseObject = (dbObject) => {
   return {
+    username: dbObject.name,
     tweetId: dbObject.tweet_id,
     tweet: dbObject.tweet,
     userId: dbObject.user_id,
+    dateTime: dbObject.date_time,
+  };
+};
+const convertNewTweetTableDbObjectToResponseObject = (dbObject) => {
+  return {
+    tweet: dbObject.tweet,
+    likes: dbObject.likes,
+    replies: dbObject.replies,
     dateTime: dbObject.date_time,
   };
 };
@@ -193,7 +202,7 @@ app.get("/user/following/", authenticateToken, async (request, response) => {
   const getUserFollowQuery = `SELECT name from user WHERE user_id IN (SELECT follower_user_id FROM follower INNER JOIN user ON user.user_id=follower.following_user_id WHERE user.user_id= ${user_id});`;
   const follower = await database.all(getUserFollowQuery);
   console.log(follower);
-  response.send(convertUserTableDbObjectToResponseObjectTest(follower));
+  response.send(follower);
 });
 
 //API-5
@@ -215,15 +224,19 @@ app.get("/user/followers/", authenticateToken, async (request, response) => {
 app.get("/tweets/:tweetId/", authenticateToken, async (request, response) => {
   const { tweetId } = request.params;
   let { username } = request;
+  const userIdQuery = `SELECT user_id from user where username= '${username}';`;
+  const { user_id } = await database.get(userIdQuery);
+  console.log(user_id, "user id");
 
   const getTweetQuery = `
-     SELECT tweet, (SELECT count(tweet_id) FROM like WHERE tweet_id =${tweetId}) as likes, (SELECT count(tweet_id) from reply WHERE tweet_id=${tweetId} ) as reply, date_time from tweet WHERE tweet_id =${tweetId} IN (SELECT tweet_id FROM tweet WHERE user_id IN (SELECT following_user_id FROM follower INNER JOIN user ON user.user_id=follower.follower_user_id  WHERE user.username=${username}));`;
+     SELECT tweet, (SELECT count(tweet_id) FROM like WHERE tweet_id =${tweetId}) as likes, (SELECT count(tweet_id) from reply WHERE tweet_id=${tweetId} ) as reply, date_time from tweet WHERE tweet_id =${tweetId} IN (SELECT tweet_id FROM tweet WHERE user_id IN (SELECT following_user_id FROM follower INNER JOIN user ON user.user_id=follower.follower_user_id  WHERE user.user_id= ${user_id}));`;
+  console.log(getTweetQuery, "getTweetQuery");
   const tweet = await database.all(getTweetQuery);
   if (tweet === undefined) {
     response.status(401);
     response.send("Invalid Request");
   } else {
-    response.send(convertTweetTableDbObjectToResponseObject(tweet));
+    response.send(tweet);
   }
 });
 
